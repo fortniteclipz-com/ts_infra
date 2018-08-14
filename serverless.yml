@@ -1,0 +1,29 @@
+service: twitch-stitch-infra
+
+provider:
+  name: aws
+  memorySize: 512
+  profile: serverless-admin
+  region: us-west-1
+  runtime: python3.6
+  stackName: twitch-stitch-sls-infra
+  stage: dev
+  timeout: 30
+  versionFunctions: false
+
+package:
+  individually: true
+  exclude:
+    - '*/**'
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
+    dockerSsh: true
+
+resources:
+  - ${file(./config/databases.yml)}
+  - ${file(./config/queues.yml)}
