@@ -27,19 +27,9 @@ Resources:
           KeyType: HASH
         - AttributeName: segment
           KeyType: RANGE
-      GlobalSecondaryIndexes:
-        - IndexName: stream-segments-index
-          KeySchema:
-            - AttributeName: stream_id
-              KeyType: HASH
-          Projection:
-            ProjectionType: ALL
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
       ProvisionedThroughput:
-        ReadCapacityUnits: 25
-        WriteCapacityUnits: 25
+        ReadCapacityUnits: 10
+        WriteCapacityUnits: 10
 
   ClipTable:
     Type: AWS::DynamoDB::Table
@@ -69,16 +59,6 @@ Resources:
           KeyType: HASH
         - AttributeName: segment
           KeyType: RANGE
-      GlobalSecondaryIndexes:
-        - IndexName: clip-segments-index
-          KeySchema:
-            - AttributeName: clip_id
-              KeyType: HASH
-          Projection:
-            ProjectionType: ALL
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
@@ -104,23 +84,20 @@ Resources:
       AttributeDefinitions:
         - AttributeName: montage_id
           AttributeType: S
-        - AttributeName: clip_id
+        - AttributeName: clip_order
           AttributeType: S
       KeySchema:
         - AttributeName: montage_id
           KeyType: HASH
-        - AttributeName: clip_id
+        - AttributeName: clip_order
           KeyType: RANGE
-      GlobalSecondaryIndexes:
-        - IndexName: montage-clips-index
+      LocalSecondaryIndexes:
+        - IndexName: clip_id-index
           KeySchema:
-            - AttributeName: montage_id
+            - AttributeName: clip_id
               KeyType: HASH
           Projection:
             ProjectionType: ALL
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
