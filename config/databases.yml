@@ -22,14 +22,35 @@ Resources:
           AttributeType: N
         - AttributeName: segment
           AttributeType: N
+        - AttributeName: time_in
+          AttributeType: N
+        - AttributeName: time_out
+          AttributeType: N
       KeySchema:
         - AttributeName: stream_id
           KeyType: HASH
         - AttributeName: segment
           KeyType: RANGE
+      LocalSecondaryIndexes:
+        - IndexName: stream_id-time_in-index
+          KeySchema:
+            - AttributeName: stream_id
+              KeyType: HASH
+            - AttributeName: time_in
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: stream_id-time_out-index
+          KeySchema:
+            - AttributeName: stream_id
+              KeyType: HASH
+            - AttributeName: time_out
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
       ProvisionedThroughput:
-        ReadCapacityUnits: 10
-        WriteCapacityUnits: 10
+        ReadCapacityUnits: 5
+        WriteCapacityUnits: 5
 
   ClipTable:
     Type: AWS::DynamoDB::Table
@@ -85,19 +106,26 @@ Resources:
         - AttributeName: montage_id
           AttributeType: S
         - AttributeName: clip_order
+          AttributeType: N
+        - AttributeName: clip_id
           AttributeType: S
       KeySchema:
         - AttributeName: montage_id
           KeyType: HASH
         - AttributeName: clip_order
           KeyType: RANGE
-      LocalSecondaryIndexes:
-        - IndexName: clip_id-index
+      GlobalSecondaryIndexes:
+        - IndexName: clip_id-montage_id-index
           KeySchema:
             - AttributeName: clip_id
               KeyType: HASH
+            - AttributeName: montage_id
+              KeyType: RANGE
           Projection:
             ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1

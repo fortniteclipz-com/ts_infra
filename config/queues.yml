@@ -16,53 +16,19 @@ Resources:
             - Arn
         maxReceiveCount: 10
 
-  MontageDeadQueue:
+  StreamSegmentDownloadDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ts-montage-dead
+      QueueName: ts-stream-segment-download-dead
 
-  MontageQueue:
+  StreamSegmentDownloadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ts-montage
-      VisibilityTimeout: 30
-      RedrivePolicy:
-        deadLetterTargetArn:
-          Fn::GetAtt:
-            - MontageDeadQueue
-            - Arn
-        maxReceiveCount: 10
-
-  StreamDeadQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      QueueName: ts-stream-dead
-
-  StreamQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      QueueName: ts-stream
+      QueueName: ts-stream-segment-download
       VisibilityTimeout: 180
       RedrivePolicy:
         deadLetterTargetArn:
           Fn::GetAtt:
-            - StreamDeadQueue
-            - Arn
-        maxReceiveCount: 10
-
-  StreamSegmentDeadQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      QueueName: ts-stream-segment-dead
-
-  StreamSegmentQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      QueueName: ts-stream-segment
-      VisibilityTimeout: 180
-      RedrivePolicy:
-        deadLetterTargetArn:
-          Fn::GetAtt:
-            - StreamSegmentDeadQueue
+            - StreamSegmentDownloadDeadQueue
             - Arn
         maxReceiveCount: 10

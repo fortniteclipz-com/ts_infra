@@ -16,9 +16,6 @@ package:
   exclude:
     - '*/**'
 
-plugins:
-  - serverless-python-requirements
-
 custom:
   pythonRequirements:
     dockerizePip: non-linux
