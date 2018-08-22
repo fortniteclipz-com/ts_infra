@@ -24,8 +24,6 @@ Resources:
           AttributeType: N
         - AttributeName: time_in
           AttributeType: N
-        - AttributeName: time_out
-          AttributeType: N
       KeySchema:
         - AttributeName: stream_id
           KeyType: HASH
