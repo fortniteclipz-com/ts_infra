@@ -40,14 +40,6 @@ Resources:
               KeyType: RANGE
           Projection:
             ProjectionType: ALL
-        - IndexName: stream_id-time_out-index
-          KeySchema:
-            - AttributeName: stream_id
-              KeyType: HASH
-            - AttributeName: time_out
-              KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
       ProvisionedThroughput:
         ReadCapacityUnits: 5
         WriteCapacityUnits: 5
