@@ -39,8 +39,8 @@ Resources:
           Projection:
             ProjectionType: ALL
       ProvisionedThroughput:
-        ReadCapacityUnits: 10
-        WriteCapacityUnits: 10
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
 
   ClipTable:
     Type: AWS::DynamoDB::Table

@@ -2,5 +2,8 @@
   "name": "ts_infra",
   "version": "1.0",
   "author": "Ahuja",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "serverless-dynamodb-autoscaling": "^0.6.2"
+  }
 }

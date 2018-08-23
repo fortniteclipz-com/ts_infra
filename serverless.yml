@@ -13,10 +13,12 @@ package:
   exclude:
     - '*/**'
 
+plugins:
+  - serverless-dynamodb-autoscaling
+
 custom:
-  pythonRequirements:
-    dockerizePip: non-linux
-    dockerSsh: true
+  capacities:
+    ${file(./config/capacities.yml)}
 
 resources:
   - ${file(./config/databases.yml)}
