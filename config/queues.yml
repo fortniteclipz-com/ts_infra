@@ -16,6 +16,23 @@ Resources:
             - Arn
         maxReceiveCount: 10
 
+  StreamInitializeDeadQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ts-stream-initialize-dead
+
+  StreamInitializeQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ts-stream-initialize
+      VisibilityTimeout: 300
+      RedrivePolicy:
+        deadLetterTargetArn:
+          Fn::GetAtt:
+            - StreamInitializeDeadQueue
+            - Arn
+        maxReceiveCount: 10
+
   StreamSegmentDownloadDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
