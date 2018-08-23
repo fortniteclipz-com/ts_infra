@@ -25,7 +25,7 @@ Resources:
     Type: AWS::SQS::Queue
     Properties:
       QueueName: ts-stream-segment-download
-      VisibilityTimeout: 180
+      VisibilityTimeout: 30
       RedrivePolicy:
         deadLetterTargetArn:
           Fn::GetAtt:
