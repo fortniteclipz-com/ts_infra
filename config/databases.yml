@@ -2,7 +2,7 @@ Resources:
   StreamTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ts-streams
+      TableName: ${self:custom.config.aws.dynamodb.streams.name}
       AttributeDefinitions:
         - AttributeName: stream_id
           AttributeType: N
@@ -16,7 +16,7 @@ Resources:
   StreamSegmentsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ts-stream-segments
+      TableName: ${self:custom.config.aws.dynamodb.stream-segments.name}
       AttributeDefinitions:
         - AttributeName: stream_id
           AttributeType: N
@@ -45,7 +45,7 @@ Resources:
   ClipTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ts-clips
+      TableName: ${self:custom.config.aws.dynamodb.clips.name}
       AttributeDefinitions:
         - AttributeName: clip_id
           AttributeType: S
@@ -59,7 +59,7 @@ Resources:
   ClipSegmentsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ts-clip-segments
+      TableName: ${self:custom.config.aws.dynamodb.clip-segments.name}
       AttributeDefinitions:
         - AttributeName: clip_id
           AttributeType: S
@@ -77,7 +77,7 @@ Resources:
   MontageTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ts-montages
+      TableName: ${self:custom.config.aws.dynamodb.montages.name}
       AttributeDefinitions:
         - AttributeName: montage_id
           AttributeType: S
@@ -91,7 +91,7 @@ Resources:
   MontageClipsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ts-montage-clips
+      TableName: ${self:custom.config.aws.dynamodb.montage-clips.name}
       AttributeDefinitions:
         - AttributeName: montage_id
           AttributeType: S

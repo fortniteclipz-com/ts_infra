@@ -2,12 +2,12 @@ Resources:
   ClipDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ts-clip-dead
+      QueueName: ${self:custom.config.aws.sqs.clip.name}-dead
 
   ClipQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ts-clip
+      QueueName: ${self:custom.config.aws.sqs.clip.name}
       VisibilityTimeout: 30
       RedrivePolicy:
         deadLetterTargetArn:
@@ -19,12 +19,12 @@ Resources:
   StreamInitializeDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ts-stream-initialize-dead
+      QueueName: ${self:custom.config.aws.sqs.stream-initialize.name}-dead
 
   StreamInitializeQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ts-stream-initialize
+      QueueName: ${self:custom.config.aws.sqs.stream-initialize.name}
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
@@ -36,12 +36,12 @@ Resources:
   StreamSegmentDownloadDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ts-stream-segment-download-dead
+      QueueName: ${self:custom.config.aws.sqs.stream-segment-download.name}-dead
 
   StreamSegmentDownloadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ts-stream-segment-download
+      QueueName: ${self:custom.config.aws.sqs.stream-segment-download.name}
       VisibilityTimeout: 180
       RedrivePolicy:
         deadLetterTargetArn:

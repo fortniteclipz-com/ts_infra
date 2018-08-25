@@ -17,6 +17,7 @@ plugins:
   - serverless-dynamodb-autoscaling
 
 custom:
+  config: ${file(../ts_shared/ts_config/ts_config/ts_config.yml)}
   capacities:
     ${file(./config/capacities.yml)}
 
