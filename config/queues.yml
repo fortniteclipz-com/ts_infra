@@ -42,7 +42,7 @@ Resources:
     Type: AWS::SQS::Queue
     Properties:
       QueueName: ${self:custom.config.aws.sqs.stream-segment-download.name}
-      VisibilityTimeout: 180
+      VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
           Fn::GetAtt:
