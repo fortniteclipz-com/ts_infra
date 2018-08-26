@@ -3,7 +3,7 @@ service: ts-infra
 provider:
   name: aws
   profile: serverless-admin
-  region: us-west-1
+  region: ${self:custom.config.aws.region}
   runtime: python3.6
   stage: dev
   versionFunctions: false
