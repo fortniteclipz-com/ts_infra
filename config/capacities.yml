@@ -9,11 +9,11 @@
     usage: 0.75
 - table: StreamSegmentsTable
   read:
-    minimum: 15
+    minimum: 50
     maximum: 1000
     usage: 0.75
   write:
-    minimum: 15
+    minimum: 50
     maximum: 1000
     usage: 0.75
 - table: ClipTable
@@ -27,12 +27,12 @@
     usage: 0.75
 - table: ClipSegmentsTable
   read:
-    minimum: 15
-    maximum: 1000
+    minimum: 5
+    maximum: 500
     usage: 0.75
   write:
-    minimum: 15
-    maximum: 1000
+    minimum: 5
+    maximum: 500
     usage: 0.75
 - table: MontageTable
   read:
