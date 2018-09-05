@@ -14,7 +14,24 @@ Resources:
           Fn::GetAtt:
             - ClipDeadQueue
             - Arn
-        maxReceiveCount: 50
+        maxReceiveCount: 100
+
+  MontageDeadQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:custom.config.aws.sqs.montage.name}-dead
+
+  MontageQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:custom.config.aws.sqs.montage.name}
+      VisibilityTimeout: 30
+      RedrivePolicy:
+        deadLetterTargetArn:
+          Fn::GetAtt:
+            - MontageDeadQueue
+            - Arn
+        maxReceiveCount: 100
 
   StreamInitializeDeadQueue:
     Type: AWS::SQS::Queue
