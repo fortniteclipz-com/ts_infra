@@ -33,15 +33,32 @@ Resources:
             - Arn
         maxReceiveCount: 100
 
+  StreamAnalyzeQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:custom.config.aws.sqs.stream--analyze.name}
+      VisibilityTimeout: 300
+      RedrivePolicy:
+        deadLetterTargetArn:
+          Fn::GetAtt:
+            - StreamAnalyzeDeadQueue
+            - Arn
+        maxReceiveCount: 10
+
+  StreamAnalyzeDeadQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:custom.config.aws.sqs.stream--analyze.name}-dead
+
   StreamInitializeDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.aws.sqs.stream-initialize.name}-dead
+      QueueName: ${self:custom.config.aws.sqs.stream--initialize.name}-dead
 
   StreamInitializeQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.aws.sqs.stream-initialize.name}
+      QueueName: ${self:custom.config.aws.sqs.stream--initialize.name}
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
@@ -50,15 +67,27 @@ Resources:
             - Arn
         maxReceiveCount: 10
 
-  StreamSegmentDownloadDeadQueue:
+  StreamSegmentAnalyzeQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.aws.sqs.stream-segment-download.name}-dead
+      QueueName: ${self:custom.config.aws.sqs.stream-segment--analyze.name}
+      VisibilityTimeout: 300
+      RedrivePolicy:
+        deadLetterTargetArn:
+          Fn::GetAtt:
+            - StreamSegmentAnalyzeDeadQueue
+            - Arn
+        maxReceiveCount: 10
+
+  StreamSegmentAnalyzeDeadQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:custom.config.aws.sqs.stream-segment--analyze.name}-dead
 
   StreamSegmentDownloadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.aws.sqs.stream-segment-download.name}
+      QueueName: ${self:custom.config.aws.sqs.stream-segment--download.name}
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
@@ -66,3 +95,8 @@ Resources:
             - StreamSegmentDownloadDeadQueue
             - Arn
         maxReceiveCount: 10
+
+  StreamSegmentDownloadDeadQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:custom.config.aws.sqs.stream-segment--download.name}-dead
