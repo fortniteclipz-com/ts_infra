@@ -1,4 +1,13 @@
-- table: StreamTable
+- table: StreamsTable
+  read:
+    minimum: 5
+    maximum: 500
+    usage: 0.75
+  write:
+    minimum: 5
+    maximum: 500
+    usage: 0.75
+- table: StreamEventsTable
   read:
     minimum: 5
     maximum: 500
@@ -16,7 +25,7 @@
     minimum: 250
     maximum: 1000
     usage: 0.75
-- table: ClipTable
+- table: ClipsTable
   read:
     minimum: 5
     maximum: 500
@@ -34,7 +43,7 @@
     minimum: 5
     maximum: 500
     usage: 0.75
-- table: MontageTable
+- table: MontagesTable
   read:
     minimum: 5
     maximum: 500

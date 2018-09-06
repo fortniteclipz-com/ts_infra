@@ -1,48 +1,5 @@
 Resources:
-  StreamTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: ${self:custom.config.aws.dynamodb.streams.name}
-      AttributeDefinitions:
-        - AttributeName: stream_id
-          AttributeType: N
-      KeySchema:
-        - AttributeName: stream_id
-          KeyType: HASH
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
-
-  StreamSegmentsTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: ${self:custom.config.aws.dynamodb.stream-segments.name}
-      AttributeDefinitions:
-        - AttributeName: stream_id
-          AttributeType: N
-        - AttributeName: segment
-          AttributeType: N
-        - AttributeName: time_in
-          AttributeType: N
-      KeySchema:
-        - AttributeName: stream_id
-          KeyType: HASH
-        - AttributeName: segment
-          KeyType: RANGE
-      LocalSecondaryIndexes:
-        - IndexName: stream_id-time_in-index
-          KeySchema:
-            - AttributeName: stream_id
-              KeyType: HASH
-            - AttributeName: time_in
-              KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
-
-  ClipTable:
+  ClipsTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: ${self:custom.config.aws.dynamodb.clips.name}
@@ -74,7 +31,7 @@ Resources:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
 
-  MontageTable:
+  MontagesTable:
     Type: AWS::DynamoDB::Table
     Properties:
       TableName: ${self:custom.config.aws.dynamodb.montages.name}
@@ -116,6 +73,78 @@ Resources:
           ProvisionedThroughput:
             ReadCapacityUnits: 1
             WriteCapacityUnits: 1
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+  StreamsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.config.aws.dynamodb.streams.name}
+      AttributeDefinitions:
+        - AttributeName: stream_id
+          AttributeType: N
+      KeySchema:
+        - AttributeName: stream_id
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+  StreamEventsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.config.aws.dynamodb.stream-events.name}
+      AttributeDefinitions:
+        - AttributeName: stream_id
+          AttributeType: N
+        - AttributeName: event_id
+          AttributeType: N
+        - AttributeName: time
+          AttributeType: N
+      KeySchema:
+        - AttributeName: stream_id
+          KeyType: HASH
+        - AttributeName: event_id
+          KeyType: RANGE
+      LocalSecondaryIndexes:
+        - IndexName: stream_id-time-index
+          KeySchema:
+            - AttributeName: stream_id
+              KeyType: HASH
+            - AttributeName: time
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+  StreamSegmentsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.config.aws.dynamodb.stream-segments.name}
+      AttributeDefinitions:
+        - AttributeName: stream_id
+          AttributeType: N
+        - AttributeName: segment
+          AttributeType: N
+        - AttributeName: time_in
+          AttributeType: N
+      KeySchema:
+        - AttributeName: stream_id
+          KeyType: HASH
+        - AttributeName: segment
+          KeyType: RANGE
+      LocalSecondaryIndexes:
+        - IndexName: stream_id-time_in-index
+          KeySchema:
+            - AttributeName: stream_id
+              KeyType: HASH
+            - AttributeName: time_in
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
