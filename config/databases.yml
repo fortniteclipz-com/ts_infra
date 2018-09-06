@@ -99,7 +99,7 @@ Resources:
         - AttributeName: stream_id
           AttributeType: N
         - AttributeName: event_id
-          AttributeType: N
+          AttributeType: S
         - AttributeName: time
           AttributeType: N
       KeySchema:
