@@ -43,7 +43,7 @@ Resources:
           Fn::GetAtt:
             - StreamAnalyzeDeadQueue
             - Arn
-        maxReceiveCount: 10
+        maxReceiveCount: 100
 
   StreamAnalyzeDeadQueue:
     Type: AWS::SQS::Queue
@@ -65,7 +65,7 @@ Resources:
           Fn::GetAtt:
             - StreamInitializeDeadQueue
             - Arn
-        maxReceiveCount: 10
+        maxReceiveCount: 100
 
   StreamSegmentAnalyzeQueue:
     Type: AWS::SQS::Queue
@@ -77,7 +77,7 @@ Resources:
           Fn::GetAtt:
             - StreamSegmentAnalyzeDeadQueue
             - Arn
-        maxReceiveCount: 10
+        maxReceiveCount: 100
 
   StreamSegmentAnalyzeDeadQueue:
     Type: AWS::SQS::Queue
@@ -94,7 +94,7 @@ Resources:
           Fn::GetAtt:
             - StreamSegmentDownloadDeadQueue
             - Arn
-        maxReceiveCount: 10
+        maxReceiveCount: 100
 
   StreamSegmentDownloadDeadQueue:
     Type: AWS::SQS::Queue
