@@ -7,7 +7,7 @@
     minimum: 5
     maximum: 500
     usage: 0.75
-- table: StreamEventsTable
+- table: StreamMomentsTable
   read:
     minimum: 5
     maximum: 500

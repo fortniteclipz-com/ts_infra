@@ -91,21 +91,21 @@ Resources:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
 
-  StreamEventsTable:
+  StreamMomentsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.config.aws.dynamodb.stream-events.name}
+      TableName: ${self:custom.config.aws.dynamodb.stream-moments.name}
       AttributeDefinitions:
         - AttributeName: stream_id
           AttributeType: N
-        - AttributeName: event_id
+        - AttributeName: moment_id
           AttributeType: S
         - AttributeName: time
           AttributeType: N
       KeySchema:
         - AttributeName: stream_id
           KeyType: HASH
-        - AttributeName: event_id
+        - AttributeName: moment_id
           KeyType: RANGE
       LocalSecondaryIndexes:
         - IndexName: stream_id-time-index
