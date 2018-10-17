@@ -129,7 +129,7 @@ Resources:
           AttributeType: N
         - AttributeName: segment
           AttributeType: N
-        - AttributeName: time_in
+        - AttributeName: stream_time_in
           AttributeType: N
       KeySchema:
         - AttributeName: stream_id
@@ -137,11 +137,11 @@ Resources:
         - AttributeName: segment
           KeyType: RANGE
       LocalSecondaryIndexes:
-        - IndexName: stream_id-time_in-index
+        - IndexName: stream_id-stream_time_in-index
           KeySchema:
             - AttributeName: stream_id
               KeyType: HASH
-            - AttributeName: time_in
+            - AttributeName: stream_time_in
               KeyType: RANGE
           Projection:
             ProjectionType: ALL
