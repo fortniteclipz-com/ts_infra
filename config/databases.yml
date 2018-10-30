@@ -83,7 +83,7 @@ Resources:
       TableName: ${self:custom.config.aws.dynamodb.streams.name}
       AttributeDefinitions:
         - AttributeName: stream_id
-          AttributeType: N
+          AttributeType: S
       KeySchema:
         - AttributeName: stream_id
           KeyType: HASH
@@ -97,7 +97,7 @@ Resources:
       TableName: ${self:custom.config.aws.dynamodb.stream-moments.name}
       AttributeDefinitions:
         - AttributeName: stream_id
-          AttributeType: N
+          AttributeType: S
         - AttributeName: moment_id
           AttributeType: S
         - AttributeName: time
@@ -126,7 +126,7 @@ Resources:
       TableName: ${self:custom.config.aws.dynamodb.stream-segments.name}
       AttributeDefinitions:
         - AttributeName: stream_id
-          AttributeType: N
+          AttributeType: S
         - AttributeName: segment
           AttributeType: N
         - AttributeName: stream_time_in
