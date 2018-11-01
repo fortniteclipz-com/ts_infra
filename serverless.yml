@@ -8,11 +8,6 @@ provider:
   stage: dev
   versionFunctions: false
 
-package:
-  individually: true
-  exclude:
-    - '*/**'
-
 plugins:
   - serverless-dynamodb-autoscaling
 
