@@ -2,7 +2,7 @@ Resources:
   ClipsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.config.aws.dynamodb.clips.name}
+      TableName: ${self:custom.config.dynamodb.tables.clips.name}-${self:custom.config.stage}
       AttributeDefinitions:
         - AttributeName: clip_id
           AttributeType: S
@@ -16,7 +16,7 @@ Resources:
   ClipSegmentsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.config.aws.dynamodb.clip-segments.name}
+      TableName: ${self:custom.config.dynamodb.tables.clip-segments.name}-${self:custom.config.stage}
       AttributeDefinitions:
         - AttributeName: clip_id
           AttributeType: S
@@ -34,7 +34,7 @@ Resources:
   MontagesTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.config.aws.dynamodb.montages.name}
+      TableName: ${self:custom.config.dynamodb.tables.montages.name}-${self:custom.config.stage}
       AttributeDefinitions:
         - AttributeName: montage_id
           AttributeType: S
@@ -48,7 +48,7 @@ Resources:
   MontageClipsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.config.aws.dynamodb.montage-clips.name}
+      TableName: ${self:custom.config.dynamodb.tables.montage-clips.name}-${self:custom.config.stage}
       AttributeDefinitions:
         - AttributeName: montage_id
           AttributeType: S
@@ -80,7 +80,7 @@ Resources:
   StreamsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.config.aws.dynamodb.streams.name}
+      TableName: ${self:custom.config.dynamodb.tables.streams.name}-${self:custom.config.stage}
       AttributeDefinitions:
         - AttributeName: stream_id
           AttributeType: S
@@ -94,7 +94,7 @@ Resources:
   StreamMomentsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.config.aws.dynamodb.stream-moments.name}
+      TableName: ${self:custom.config.dynamodb.tables.stream-moments.name}-${self:custom.config.stage}
       AttributeDefinitions:
         - AttributeName: stream_id
           AttributeType: S
@@ -123,7 +123,7 @@ Resources:
   StreamSegmentsTable:
     Type: AWS::DynamoDB::Table
     Properties:
-      TableName: ${self:custom.config.aws.dynamodb.stream-segments.name}
+      TableName: ${self:custom.config.dynamodb.tables.stream-segments.name}-${self:custom.config.stage}
       AttributeDefinitions:
         - AttributeName: stream_id
           AttributeType: S

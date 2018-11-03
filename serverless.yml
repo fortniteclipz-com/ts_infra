@@ -3,9 +3,9 @@ service: ts-infra
 provider:
   name: aws
   profile: serverless-admin
-  region: ${self:custom.config.aws.region}
+  region: ${self:custom.config.region}
   runtime: python3.6
-  stage: dev
+  stage: ${self:custom.config.stage}
   versionFunctions: false
 
 plugins:
@@ -17,18 +17,7 @@ custom:
     ${file(./config/capacities.yml)}
 
 resources:
-  - ${file(./config/databases.yml)}
+  - ${file(./config/cognito.yml)}
   - ${file(./config/queues.yml)}
-  - Resources:
-      tsUserPool:
-        Type: AWS::Cognito::UserPool
-        Properties:
-          AliasAttributes:
-            - email
-          Policies:
-            PasswordPolicy:
-              MinimumLength: 6
-              RequireLowercase: false
-              RequireNumbers: false
-              RequireSymbols: false
-              RequireUppercase: false
+  - ${file(./config/tables.yml)}
+
