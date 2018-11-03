@@ -18,6 +18,7 @@ package:
 
 plugins:
   - serverless-dynamodb-autoscaling
+  - serverless-python-requirements
 
 custom:
   config: ${file(../ts_shared/ts_config/ts_config/ts_config.yml)}
