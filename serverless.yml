@@ -8,6 +8,14 @@ provider:
   stage: ${self:custom.config.stage}
   versionFunctions: false
 
+  memorySize: 128
+  timeout: 30
+
+package:
+  individually: true
+  exclude:
+    - '*/**'
+
 plugins:
   - serverless-dynamodb-autoscaling
 
@@ -15,9 +23,23 @@ custom:
   config: ${file(../ts_shared/ts_config/ts_config/ts_config.yml)}
   capacities:
     ${file(./config/capacities.yml)}
+  pythonRequirements:
+    dockerizePip: non-linux
+    dockerSsh: true
 
 resources:
   - ${file(./config/cognito.yml)}
   - ${file(./config/queues.yml)}
   - ${file(./config/tables.yml)}
 
+functions:
+  infra--user--presignup:
+    handler: run.run
+    module: modules/user__presignup
+    events:
+      - cognitoUserPool:
+          pool: TwitchStitchUserPool
+          trigger: PreSignUp
+    package:
+      include:
+        - modules/user__presignup/run.py

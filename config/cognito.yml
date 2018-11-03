@@ -1,0 +1,20 @@
+Resources:
+  CognitoUserPoolTwitchStitchUserPool:
+    Type: AWS::Cognito::UserPool
+    Properties:
+      UserPoolName: twitch-user-pool-${self:custom.config.stage}
+      UsernameAttributes:
+        - email
+      Policies:
+        PasswordPolicy:
+          MinimumLength: 6
+          RequireLowercase: false
+          RequireNumbers: false
+          RequireSymbols: false
+          RequireUppercase: false
+  TwitchStitchUserPoolClient:
+    Type: AWS::Cognito::UserPoolClient
+    Properties:
+      ClientName: twitch-user-pool-client-${self:custom.config.stage}
+      UserPoolId:
+        Ref: CognitoUserPoolTwitchStitchUserPool
