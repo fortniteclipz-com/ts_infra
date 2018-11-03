@@ -22,8 +22,7 @@ plugins:
 
 custom:
   config: ${file(../ts_shared/ts_config/ts_config/ts_config.yml)}
-  capacities:
-    ${file(./config/capacities.yml)}
+  capacities: ${file(./config/capacities.yml)}
   pythonRequirements:
     dockerizePip: non-linux
     dockerSsh: true
