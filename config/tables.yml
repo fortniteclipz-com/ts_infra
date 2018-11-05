@@ -149,6 +149,24 @@ Resources:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
 
+  UseClipsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.config.dynamodb.tables.user-clips.name}-${self:custom.config.stage}
+      AttributeDefinitions:
+        - AttributeName: user_id
+          AttributeType: S
+        - AttributeName: clip_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: user_id
+          KeyType: HASH
+        - AttributeName: clip_id
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
   UserMontagesTable:
     Type: AWS::DynamoDB::Table
     Properties:
