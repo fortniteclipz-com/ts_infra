@@ -148,3 +148,39 @@ Resources:
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
+
+  UserMontagesTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.config.dynamodb.tables.user-montages.name}-${self:custom.config.stage}
+      AttributeDefinitions:
+        - AttributeName: user_id
+          AttributeType: S
+        - AttributeName: montage_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: user_id
+          KeyType: HASH
+        - AttributeName: montage_id
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+
+  UserStreamsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.config.dynamodb.tables.user-streams.name}-${self:custom.config.stage}
+      AttributeDefinitions:
+        - AttributeName: user_id
+          AttributeType: S
+        - AttributeName: stream_id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: user_id
+          KeyType: HASH
+        - AttributeName: stream_id
+          KeyType: RANGE
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
