@@ -54,8 +54,6 @@ Resources:
           AttributeType: S
         - AttributeName: clip_order
           AttributeType: N
-        - AttributeName: clip_id
-          AttributeType: S
       KeySchema:
         - AttributeName: montage_id
           KeyType: HASH
