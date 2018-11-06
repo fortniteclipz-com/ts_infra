@@ -161,35 +161,6 @@ Resources:
           Projection:
             ProjectionType: ALL
 
-  UserClipsTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: ${self:custom.config.dynamodb.tables.user-clips.name}-${self:custom.config.stage}
-      AttributeDefinitions:
-        - AttributeName: user_id
-          AttributeType: S
-        - AttributeName: clip_id
-          AttributeType: S
-        - AttributeName: created
-          AttributeType: S
-      KeySchema:
-        - AttributeName: user_id
-          KeyType: HASH
-        - AttributeName: clip_id
-          KeyType: RANGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
-      LocalSecondaryIndexes:
-        - IndexName: user_id-created-index
-          KeySchema:
-            - AttributeName: user_id
-              KeyType: HASH
-            - AttributeName: created
-              KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
-
   UserMontagesTable:
     Type: AWS::DynamoDB::Table
     Properties:

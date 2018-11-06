@@ -61,15 +61,6 @@
     minimum: 5
     maximum: 500
     usage: 0.75
-- table: UserClipsTable
-  read:
-    minimum: 5
-    maximum: 500
-    usage: 0.75
-  write:
-    minimum: 5
-    maximum: 500
-    usage: 0.75
 - table: UserMontagesTable
   read:
     minimum: 5
