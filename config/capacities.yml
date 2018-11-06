@@ -1,30 +1,3 @@
-- table: StreamsTable
-  read:
-    minimum: 5
-    maximum: 500
-    usage: 0.75
-  write:
-    minimum: 5
-    maximum: 500
-    usage: 0.75
-- table: StreamMomentsTable
-  read:
-    minimum: 5
-    maximum: 500
-    usage: 0.75
-  write:
-    minimum: 5
-    maximum: 500
-    usage: 0.75
-- table: StreamSegmentsTable
-  read:
-    minimum: 150
-    maximum: 1000
-    usage: 0.75
-  write:
-    minimum: 250
-    maximum: 1000
-    usage: 0.75
 - table: ClipsTable
   read:
     minimum: 5
@@ -61,7 +34,38 @@
     minimum: 5
     maximum: 500
     usage: 0.75
+- table: StreamsTable
+  index:
+    - _last_modified-index
+  read:
+    minimum: 5
+    maximum: 500
+    usage: 0.75
+  write:
+    minimum: 5
+    maximum: 500
+    usage: 0.75
+- table: StreamMomentsTable
+  read:
+    minimum: 5
+    maximum: 500
+    usage: 0.75
+  write:
+    minimum: 5
+    maximum: 500
+    usage: 0.75
+- table: StreamSegmentsTable
+  read:
+    minimum: 150
+    maximum: 1000
+    usage: 0.75
+  write:
+    minimum: 250
+    maximum: 1000
+    usage: 0.75
 - table: UserMontagesTable
+  index:
+    - created-index
   read:
     minimum: 5
     maximum: 500

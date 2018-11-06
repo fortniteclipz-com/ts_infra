@@ -61,18 +61,6 @@ Resources:
           KeyType: HASH
         - AttributeName: clip_order
           KeyType: RANGE
-      GlobalSecondaryIndexes:
-        - IndexName: clip_id-montage_id-index
-          KeySchema:
-            - AttributeName: clip_id
-              KeyType: HASH
-            - AttributeName: montage_id
-              KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
