@@ -13,24 +13,6 @@ Resources:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
 
-  ClipSegmentsTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: ${self:custom.config.dynamodb.tables.clip-segments.name}-${self:custom.config.stage}
-      AttributeDefinitions:
-        - AttributeName: clip_id
-          AttributeType: S
-        - AttributeName: segment
-          AttributeType: N
-      KeySchema:
-        - AttributeName: clip_id
-          KeyType: HASH
-        - AttributeName: segment
-          KeyType: RANGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
-
   MontagesTable:
     Type: AWS::DynamoDB::Table
     Properties:
@@ -41,24 +23,6 @@ Resources:
       KeySchema:
         - AttributeName: montage_id
           KeyType: HASH
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
-
-  MontageClipsTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: ${self:custom.config.dynamodb.tables.montage-clips.name}-${self:custom.config.stage}
-      AttributeDefinitions:
-        - AttributeName: montage_id
-          AttributeType: S
-        - AttributeName: clip_order
-          AttributeType: N
-      KeySchema:
-        - AttributeName: montage_id
-          KeyType: HASH
-        - AttributeName: clip_order
-          KeyType: RANGE
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
