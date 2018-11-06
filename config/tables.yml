@@ -84,12 +84,24 @@ Resources:
       AttributeDefinitions:
         - AttributeName: stream_id
           AttributeType: S
+        - AttributeName: _last_modified
+          AttributeType: S
       KeySchema:
         - AttributeName: stream_id
           KeyType: HASH
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
+      GlobalSecondaryIndexes:
+        - IndexName: _last_modified-index
+          KeySchema:
+            - AttributeName: _last_modified
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
 
   StreamMomentsTable:
     Type: AWS::DynamoDB::Table
@@ -206,3 +218,13 @@ Resources:
               KeyType: RANGE
           Projection:
             ProjectionType: ALL
+      GlobalSecondaryIndexes:
+        - IndexName: created-index
+          KeySchema:
+            - AttributeName: created
+              KeyType: HASH
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
