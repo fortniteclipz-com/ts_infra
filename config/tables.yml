@@ -20,8 +20,38 @@ Resources:
       AttributeDefinitions:
         - AttributeName: montage_id
           AttributeType: S
+        - AttributeName: user_id
+          AttributeType: S
+        - AttributeName: created
+          AttributeType: S
       KeySchema:
         - AttributeName: montage_id
+          KeyType: HASH
+      ProvisionedThroughput:
+        ReadCapacityUnits: 1
+        WriteCapacityUnits: 1
+      GlobalSecondaryIndexes:
+        - IndexName: user_id-created-index
+          KeySchema:
+            - AttributeName: user_id
+              KeyType: HASH
+            - AttributeName: created
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+          ProvisionedThroughput:
+            ReadCapacityUnits: 1
+            WriteCapacityUnits: 1
+
+  RecentsTable:
+    Type: AWS::DynamoDB::Table
+    Properties:
+      TableName: ${self:custom.config.dynamodb.tables.recents.name}-${self:custom.config.stage}
+      AttributeDefinitions:
+        - AttributeName: media
+          AttributeType: S
+      KeySchema:
+        - AttributeName: media
           KeyType: HASH
       ProvisionedThroughput:
         ReadCapacityUnits: 1
@@ -34,24 +64,12 @@ Resources:
       AttributeDefinitions:
         - AttributeName: stream_id
           AttributeType: S
-        - AttributeName: _last_modified
-          AttributeType: S
       KeySchema:
         - AttributeName: stream_id
           KeyType: HASH
       ProvisionedThroughput:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
-      GlobalSecondaryIndexes:
-        - IndexName: _last_modified-index
-          KeySchema:
-            - AttributeName: _last_modified
-              KeyType: HASH
-          Projection:
-            ProjectionType: ALL
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
 
   StreamMomentsTable:
     Type: AWS::DynamoDB::Table
@@ -110,42 +128,3 @@ Resources:
               KeyType: RANGE
           Projection:
             ProjectionType: ALL
-
-  UserMontagesTable:
-    Type: AWS::DynamoDB::Table
-    Properties:
-      TableName: ${self:custom.config.dynamodb.tables.user-montages.name}-${self:custom.config.stage}
-      AttributeDefinitions:
-        - AttributeName: user_id
-          AttributeType: S
-        - AttributeName: montage_id
-          AttributeType: S
-        - AttributeName: created
-          AttributeType: S
-      KeySchema:
-        - AttributeName: user_id
-          KeyType: HASH
-        - AttributeName: montage_id
-          KeyType: RANGE
-      ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
-      LocalSecondaryIndexes:
-        - IndexName: user_id-created-index
-          KeySchema:
-            - AttributeName: user_id
-              KeyType: HASH
-            - AttributeName: created
-              KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
-      GlobalSecondaryIndexes:
-        - IndexName: created-index
-          KeySchema:
-            - AttributeName: created
-              KeyType: HASH
-          Projection:
-            ProjectionType: ALL
-          ProvisionedThroughput:
-            ReadCapacityUnits: 1
-            WriteCapacityUnits: 1
