@@ -38,7 +38,7 @@ functions:
     module: modules/user__presignup
     events:
       - cognitoUserPool:
-          pool: TwitchStitchUserPool
+          pool: UserPool
           trigger: PreSignUp
     package:
       include:

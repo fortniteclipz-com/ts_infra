@@ -1,5 +1,5 @@
 Resources:
-  CognitoUserPoolTwitchStitchUserPool:
+  CognitoUserPoolUserPool:
     Type: AWS::Cognito::UserPool
     Properties:
       UserPoolName: twitch-user-pool-${self:custom.config.stage}
@@ -12,9 +12,9 @@ Resources:
           RequireNumbers: false
           RequireSymbols: false
           RequireUppercase: false
-  TwitchStitchUserPoolClient:
+  UserPoolClient:
     Type: AWS::Cognito::UserPoolClient
     Properties:
       ClientName: twitch-user-pool-client-${self:custom.config.stage}
       UserPoolId:
-        Ref: CognitoUserPoolTwitchStitchUserPool
+        Ref: CognitoUserPoolUserPool
