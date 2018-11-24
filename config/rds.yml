@@ -1,0 +1,99 @@
+Resources:
+    VPC:
+      Type: AWS::EC2::VPC
+      Properties:
+        CidrBlock: 10.0.0.0/16
+        EnableDnsSupport: true
+        EnableDnsHostnames: true
+    SubnetA:
+      DependsOn: VPC
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId:
+          Ref: VPC
+        AvailabilityZone: ${self:custom.config.region}a
+        CidrBlock: 10.0.0.0/24
+    SubnetB:
+      DependsOn: VPC
+      Type: AWS::EC2::Subnet
+      Properties:
+        VpcId:
+          Ref: VPC
+        AvailabilityZone: ${self:custom.config.region}b
+        CidrBlock: 10.0.1.0/24
+    InternetGateway:
+      Type: AWS::EC2::InternetGateway
+    VPCGatewayAttachment:
+      Type: AWS::EC2::VPCGatewayAttachment
+      Properties:
+        VpcId:
+          Ref: VPC
+        InternetGatewayId:
+          Ref: InternetGateway
+    RouteTable:
+      Type: AWS::EC2::RouteTable
+      Properties:
+        VpcId:
+          Ref: VPC
+    Route:
+      Type: AWS::EC2::Route
+      Properties:
+        DestinationCidrBlock: 0.0.0.0/0
+        GatewayId:
+          Ref: InternetGateway
+        RouteTableId:
+          Ref: RouteTable
+    SubnetRouteTableAssociationA:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId:
+          Ref: RouteTable
+        SubnetId:
+          Ref: SubnetA
+    SubnetRouteTableAssociationB:
+      Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId:
+          Ref: RouteTable
+        SubnetId:
+          Ref: SubnetB
+    SecurityGroup:
+      DependsOn: VPC
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: SecurityGroup
+        VpcId:
+          Ref: VPC
+        SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 3306
+          ToPort: 3306
+          CidrIp: 0.0.0.0/0
+    RDSSubnetGroup:
+      Type: AWS::RDS::DBSubnetGroup
+      Properties:
+        DBSubnetGroupDescription: RDSSubnetGroup
+        SubnetIds:
+        - Ref: SubnetA
+        - Ref: SubnetB
+    DB:
+      DependsOn: SecurityGroup
+      Type: AWS::RDS::DBInstance
+      Properties:
+        Engine: mysql
+        EngineVersion: 5.6.40
+        DBInstanceClass: db.t2.medium
+        StorageType: gp2
+        AllocatedStorage: 20
+        MultiAZ: false
+        PubliclyAccessible: true
+        BackupRetentionPeriod: 7
+        DBInstanceIdentifier: twitch-stitch-${self:custom.config.stage}
+        DBName: ${self:custom.config.rds.db}
+        MasterUsername: ${self:custom.config.rds.username}
+        MasterUserPassword: ${self:custom.config.rds.password}
+        VPCSecurityGroups:
+        - "Fn::GetAtt": SecurityGroup.GroupId
+        DBSubnetGroupName:
+          Ref: RDSSubnetGroup
+

@@ -17,12 +17,10 @@ package:
     - '*/**'
 
 plugins:
-  - serverless-dynamodb-autoscaling
   - serverless-python-requirements
 
 custom:
   config: ${file(../ts_shared/ts_config/ts_config/ts_config.yml)}
-  capacities: ${file(./config/capacities.yml)}
   pythonRequirements:
     dockerizePip: non-linux
     dockerSsh: true
@@ -30,7 +28,7 @@ custom:
 resources:
   - ${file(./config/cognito.yml)}
   - ${file(./config/queues.yml)}
-  - ${file(./config/tables.yml)}
+  - ${file(./config/rds.yml)}
 
 functions:
   infra--user--presignup:
