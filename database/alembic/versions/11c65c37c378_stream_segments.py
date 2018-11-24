@@ -20,7 +20,7 @@ def upgrade():
     op.create_table(
         'stream_segments',
         sa.Column('stream_segment_id', sa.Integer, primary_key=True, autoincrement=True),
-        sa.Column('stream_id', sa.String(255), sa.ForeignKey('streams.stream_id')),
+        sa.Column('stream_id', sa.String(255)),
         sa.Column('segment', sa.Integer),
         sa.Column('stream_time_in', sa.Float),
         sa.Column('stream_time_out', sa.Float),

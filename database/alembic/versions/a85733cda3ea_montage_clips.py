@@ -20,8 +20,8 @@ def upgrade():
     op.create_table(
         'montage_clips',
         sa.Column('montage_clip_id', sa.Integer, primary_key=True, autoincrement=True),
-        sa.Column('montage_id', sa.String(255), sa.ForeignKey('montages.montage_id')),
-        sa.Column('clip_id', sa.String(255), sa.ForeignKey('clips.clip_id')),
+        sa.Column('montage_id', sa.String(255)),
+        sa.Column('clip_id', sa.String(255)),
         sa.Column('clip_order', sa.Integer),
     )
 

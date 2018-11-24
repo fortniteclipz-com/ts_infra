@@ -2,7 +2,6 @@ echo "\n"
 echo "start database migrations"
 
 cd ./database
-echo $PWD
 if [ ! -d ./venv ]; then
     rm -rf ./venv
     rm -rf ./__pycache__

@@ -21,7 +21,7 @@ def upgrade():
         'clips',
         sa.Column('clip_id', sa.String(255), primary_key=True),
         sa.Column('user_id', sa.String(255)),
-        sa.Column('stream_id', sa.String(255), sa.ForeignKey('streams.stream_id')),
+        sa.Column('stream_id', sa.String(255)),
         sa.Column('time_in', sa.Float),
         sa.Column('time_out', sa.Float),
         sa.Column('media_key', sa.String(255)),
