@@ -19,9 +19,10 @@ depends_on = None
 def upgrade():
     op.create_table(
         'stream_moments',
-        sa.Column('stream_id', sa.String(255), primary_key=True,),
+        sa.Column('stream_moment_id', sa.Integer, primary_key=True, autoincrement=True),
+        sa.Column('stream_id', sa.String(255)),
         sa.Column('segment', sa.Integer),
-        sa.Column('time', sa.Float, primary_key=True,),
+        sa.Column('time', sa.Float),
         sa.Column('tag', sa.String(255)),
     )
 
