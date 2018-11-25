@@ -12,7 +12,7 @@ if [ ! -d ./venv ]; then
 fi
 
 source venv/bin/activate
-alembic upgrade head
+alembic downgrade base && alembic upgrade head
 
 echo "done database migrations"
 echo "\n"

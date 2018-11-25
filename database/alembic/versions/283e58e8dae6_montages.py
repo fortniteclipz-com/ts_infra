@@ -24,6 +24,7 @@ def upgrade():
         sa.Column('stream_id', sa.String(255)),
         sa.Column('streamer', sa.String(255)),
         sa.Column('duration', sa.Float),
+        sa.Column('clips', sa.Integer),
         sa.Column('media_key', sa.String(255)),
         sa.Column('_status', sa.Integer),
         sa.Column('_date_created', sa.DateTime),
