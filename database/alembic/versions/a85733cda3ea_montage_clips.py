@@ -19,9 +19,8 @@ depends_on = None
 def upgrade():
     op.create_table(
         'montage_clips',
-        sa.Column('montage_clip_id', sa.Integer, primary_key=True, autoincrement=True),
-        sa.Column('montage_id', sa.String(255)),
-        sa.Column('clip_id', sa.String(255)),
+        sa.Column('montage_id', sa.String(255), primary_key=True),
+        sa.Column('clip_id', sa.String(255), primary_key=True),
         sa.Column('clip_order', sa.Integer),
     )
 
