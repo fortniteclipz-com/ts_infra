@@ -82,7 +82,7 @@ Resources:
       Properties:
         Engine: mysql
         EngineVersion: 5.6.40
-        DBInstanceClass: db.t2.medium
+        DBInstanceClass: ${self:custom.config.rds.class}
         StorageType: gp2
         AllocatedStorage: 20
         MultiAZ: false
