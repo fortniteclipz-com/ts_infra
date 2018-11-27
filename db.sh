@@ -1,5 +1,6 @@
 export ts_env='dev'
 twitch_stitch_root="${PWD%/*}"
+
 echo "\n"
 echo "start database migrations"
 
