@@ -1,10 +1,10 @@
-export ts_env='dev'
+export ts_env=${1:-'dev'}
 twitch_stitch_root="${PWD%/*}"
 
 echo "\n"
-echo "start database migrations"
+echo "start migrations"
 
-cd ./database
+cd ./migrations
 if [ ! -d ./venv ]; then
     rm -rf ./venv
     rm -rf ./__pycache__
@@ -17,7 +17,8 @@ if [ ! -d ./venv ]; then
 fi
 
 source venv/bin/activate
-alembic downgrade base && alembic upgrade head
+alembic upgrade head
+export ts_env='dev'
 
-echo "done database migrations"
+echo "done migrations"
 echo "\n"
