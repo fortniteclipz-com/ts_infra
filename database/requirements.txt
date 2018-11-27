@@ -1,3 +1,5 @@
+git+ssh://git@github.com/sachinahj/ts_shared.git@master#egg=ts_config&subdirectory=ts_config
+
 alembic==1.0.3
 SQLAlchemy==1.2.10
 PyMySQL==0.9.2

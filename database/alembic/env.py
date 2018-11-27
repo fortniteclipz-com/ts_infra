@@ -7,6 +7,16 @@ from logging.config import fileConfig
 # access to the values within the .ini file in use.
 config = context.config
 
+import ts_config
+username = ts_config.get('rds.username')
+password = ts_config.get('rds.password')
+stage = ts_config.get('stage')
+host = ts_config.get('rds.host')
+db = ts_config.get('rds.db')
+connection_url = f"mysql+pymysql://{username}:{password}@twitch-stitch-{stage}.{host}/{db}"
+print("--- connection_url", connection_url)
+config.set_main_option('sqlalchemy.url', connection_url)
+
 # Interpret the config file for Python logging.
 # This line sets up loggers basically.
 fileConfig(config.config_file_name)
