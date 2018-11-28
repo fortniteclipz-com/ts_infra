@@ -33,6 +33,12 @@ def upgrade():
         sa.Column('_date_created', sa.DateTime),
     )
 
+    op.create_index(
+        '_status_analyze:_date_created',
+        'streams',
+        ['_status_analyze', '_date_created'],
+    )
+
 
 def downgrade():
     op.drop_table('streams')

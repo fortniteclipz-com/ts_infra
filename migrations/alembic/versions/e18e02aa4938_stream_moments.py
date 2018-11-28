@@ -26,6 +26,11 @@ def upgrade():
         sa.Column('tag', sa.String(255)),
     )
 
+    op.create_index(
+        'stream_id:time',
+        'stream_moments',
+        ['stream_id', 'time'],
+    )
 
 def downgrade():
     op.drop_table('stream_moments')

@@ -30,6 +30,18 @@ def upgrade():
         sa.Column('_date_created', sa.DateTime),
     )
 
+    op.create_index(
+        '_date_created',
+        'montages',
+        ['_date_created'],
+    )
+
+    op.create_index(
+        'user_id:_date_created',
+        'montages',
+        ['user_id', '_date_created'],
+    )
+
 
 def downgrade():
     op.drop_table('montages')

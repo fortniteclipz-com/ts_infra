@@ -29,6 +29,18 @@ def upgrade():
         sa.Column('_status_analyze', sa.Integer),
     )
 
+    op.create_index(
+        'stream_id',
+        'stream_segments',
+        ['stream_id'],
+    )
+
+    op.create_index(
+        'stream_id:stream_time_in:stream_time_out:segment',
+        'stream_segments',
+        ['stream_id', 'stream_time_in', 'stream_time_out', 'segment'],
+    )
+
 
 def downgrade():
     op.drop_table('stream_segments')

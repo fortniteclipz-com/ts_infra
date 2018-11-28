@@ -24,6 +24,11 @@ def upgrade():
         sa.Column('clip_order', sa.Integer),
     )
 
+    op.create_index(
+        'montage_id:clip_order',
+        'montage_clips',
+        ['montage_id', 'clip_order'],
+    )
 
 def downgrade():
     op.drop_table('montage_clips')
