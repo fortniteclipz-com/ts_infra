@@ -1,6 +1,6 @@
 """streams
 
-Revision ID: a132e85aa35a
+Revision ID: 001a132e85aa35a
 Revises:
 Create Date: 2018-11-18 21:12:07.418523
 
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a132e85aa35a'
+revision = '001a132e85aa35a'
 down_revision = None
 branch_labels = None
 depends_on = None

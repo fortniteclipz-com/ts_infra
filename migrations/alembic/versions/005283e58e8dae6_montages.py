@@ -1,7 +1,7 @@
 """montages
 
-Revision ID: 283e58e8dae6
-Revises: d741f4b43101
+Revision ID: 005283e58e8dae6
+Revises: 004d741f4b43101
 Create Date: 2018-11-18 22:50:35.932674
 
 """
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '283e58e8dae6'
-down_revision = 'd741f4b43101'
+revision = '005283e58e8dae6'
+down_revision = '004d741f4b43101'
 branch_labels = None
 depends_on = None
 

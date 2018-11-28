@@ -1,7 +1,7 @@
 """clips
 
-Revision ID: d741f4b43101
-Revises: e18e02aa4938
+Revision ID: 004d741f4b43101
+Revises: 003e18e02aa4938
 Create Date: 2018-11-18 22:42:46.755114
 
 """
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'd741f4b43101'
-down_revision = 'e18e02aa4938'
+revision = '004d741f4b43101'
+down_revision = '003e18e02aa4938'
 branch_labels = None
 depends_on = None
 

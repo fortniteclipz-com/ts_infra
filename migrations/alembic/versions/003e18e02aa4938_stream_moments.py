@@ -1,7 +1,7 @@
 """stream_moments
 
-Revision ID: e18e02aa4938
-Revises: 11c65c37c378
+Revision ID: 003e18e02aa4938
+Revises: 00211c65c37c378
 Create Date: 2018-11-18 22:30:04.222777
 
 """
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'e18e02aa4938'
-down_revision = '11c65c37c378'
+revision = '003e18e02aa4938'
+down_revision = '00211c65c37c378'
 branch_labels = None
 depends_on = None
 

@@ -1,7 +1,7 @@
 """montage_clips
 
-Revision ID: a85733cda3ea
-Revises: 283e58e8dae6
+Revision ID: 006a85733cda3ea
+Revises: 005283e58e8dae6
 Create Date: 2018-11-18 22:53:22.710420
 
 """
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'a85733cda3ea'
-down_revision = '283e58e8dae6'
+revision = '006a85733cda3ea'
+down_revision = '005283e58e8dae6'
 branch_labels = None
 depends_on = None
 
