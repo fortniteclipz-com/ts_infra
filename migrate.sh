@@ -1,8 +1,8 @@
-export ts_env=${1:-'dev'}
+export TS_ENV=${1:-'dev'}
 twitch_stitch_root="${PWD%/*}"
 migrations_dir=$PWD/migrations
 
-echo "ts_env: $ts_env"
+echo "TS_ENV: $TS_ENV"
 echo "\n"
 echo "start migrations"
 
@@ -12,9 +12,9 @@ if [ ! -d ./venv ]; then
     rm -rf ./__pycache__
     virtualenv ./venv -p /usr/local/bin/python3
     source venv/bin/activate
-    pip3 install --process-dependency-links -r requirements.txt
+    pip3 install -r requirements.txt
     cd $twitch_stitch_root/ts_shared
-    pip3 install --process-dependency-links -e ./ts_config
+    pip3 install -e ./ts_config
     deactivate
     cd $migrations_dir
 fi
