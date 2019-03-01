@@ -15,13 +15,13 @@ Resources:
       Description: DBClusterParameterGroup
       Family: aurora5.6
       Parameters:
-        character_set_client: utf8mb4
-        character_set_database: utf8mb4
-        character_set_results: utf8mb4
-        character_set_connection: utf8mb4
-        collation_connection: utf8mb4_unicode_ci
-        collation_server: utf8mb4_unicode_ci
-        character_set_server: utf8mb4
+        character_set_client: utf8
+        character_set_database: utf8
+        character_set_results: utf8
+        character_set_connection: utf8
+        collation_connection: utf8_unicode_ci
+        collation_server: utf8_unicode_ci
+        character_set_server: utf8
 
   DBCluster:
     # DependsOn: VPC

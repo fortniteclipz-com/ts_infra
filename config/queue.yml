@@ -11,9 +11,7 @@ Resources:
       VisibilityTimeout: 30
       RedrivePolicy:
         deadLetterTargetArn:
-          Fn::GetAtt:
-            - ClipDeadQueue
-            - Arn
+          "Fn::GetAtt": [ClipDeadQueue, Arn]
         maxReceiveCount: 1000
 
   MontageDeadQueue:
@@ -28,9 +26,7 @@ Resources:
       VisibilityTimeout: 30
       RedrivePolicy:
         deadLetterTargetArn:
-          Fn::GetAtt:
-            - MontageDeadQueue
-            - Arn
+          "Fn::GetAtt": [MontageDeadQueue, Arn]
         maxReceiveCount: 1000
 
   StreamAnalyzeQueue:
@@ -40,9 +36,7 @@ Resources:
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
-          Fn::GetAtt:
-            - StreamAnalyzeDeadQueue
-            - Arn
+          "Fn::GetAtt": [StreamAnalyzeDeadQueue, Arn]
         maxReceiveCount: 1000
 
   StreamAnalyzeDeadQueue:
@@ -62,9 +56,7 @@ Resources:
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
-          Fn::GetAtt:
-            - StreamInitializeDeadQueue
-            - Arn
+          "Fn::GetAtt": [StreamInitializeDeadQueue, Arn]
         maxReceiveCount: 1000
 
   StreamSegmentAnalyzeQueue:
@@ -74,9 +66,7 @@ Resources:
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
-          Fn::GetAtt:
-            - StreamSegmentAnalyzeDeadQueue
-            - Arn
+          "Fn::GetAtt": [StreamSegmentAnalyzeDeadQueue, Arn]
         maxReceiveCount: 1000
 
   StreamSegmentAnalyzeDeadQueue:
@@ -91,9 +81,7 @@ Resources:
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
-          Fn::GetAtt:
-            - StreamSegmentDownloadDeadQueue
-            - Arn
+          "Fn::GetAtt": [StreamSegmentDownloadDeadQueue, Arn]
         maxReceiveCount: 1000
 
   StreamSegmentDownloadDeadQueue:
