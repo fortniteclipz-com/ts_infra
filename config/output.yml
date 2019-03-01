@@ -1,0 +1,37 @@
+Outputs:
+
+  VPC:
+    Value:
+      Ref: VPC
+    Export:
+      Name: VPC
+
+  SubnetLambdaA:
+    Value:
+      Ref: SubnetLambdaA
+    Export:
+      Name: SubnetLambdaA
+
+  SubnetLambdaB:
+    Value:
+      Ref: SubnetLambdaB
+    Export:
+      Name: SubnetLambdaB
+
+  SubnetLambdaC:
+    Value:
+      Ref: SubnetLambdaC
+    Export:
+      Name: SubnetLambdaC
+
+  DefaultSecurityGroup:
+    Value:
+      "Fn::GetAtt": [VPC, DefaultSecurityGroup]
+    Export:
+      Name: DefaultSecurityGroup
+
+  UserPool:
+    Value:
+      Ref: UserPool
+    Export:
+      Name: UserPool

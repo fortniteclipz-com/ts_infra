@@ -4,11 +4,21 @@ provider:
   name: aws
   profile: serverless-admin
   region: ${self:custom.config.region}
-  runtime: python3.6
+  runtime: python3.7
   stage: ${self:custom.config.stage}
   versionFunctions: false
   environment:
-    ts_env: ${self:custom.config.stage}
+    TS_ENV: ${self:custom.config.stage}
+
+  vpc:
+    securityGroupIds:
+      - "Fn::GetAtt": [VPC, DefaultSecurityGroup]
+    subnetIds:
+      - Ref: SubnetLambdaA
+      - Ref: SubnetLambdaB
+      - Ref: SubnetLambdaC
+  iamRoleStatements:
+    ${self:custom.config.iam.role-statement}
 
   memorySize: 128
   timeout: 30
@@ -27,11 +37,16 @@ custom:
   pythonRequirements:
     dockerizePip: non-linux
     dockerSsh: true
+    slim: true
 
 resources:
-  - ${file(./config/cognito.yml)}
-  - ${file(./config/queues.yml)}
+  - ${file(./config/vpc.yml)}
+  - ${file(./config/subnet.yml)}
   - ${file(./config/rds.yml)}
+  - ${file(./config/ec2.yml)}
+  - ${file(./config/queue.yml)}
+  - ${file(./config/cognito.yml)}
+  - ${file(./config/output.yml)}
 
 functions:
   infra--user--presignup:

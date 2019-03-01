@@ -1,0 +1,13 @@
+Resources:
+
+  EC2:
+    # DependsOn: VPC
+    Type: AWS::EC2::Instance
+    Properties:
+      SubnetId:
+        Ref: SubnetEC2A
+      SecurityGroupIds:
+        - "Fn::GetAtt": [VPC, DefaultSecurityGroup]
+      InstanceType: t2.micro
+      KeyName: tsDevKeyPair
+      ImageId: ami-04328208f4f0cf1fe

@@ -1,99 +1,48 @@
 Resources:
-    VPC:
-      Type: AWS::EC2::VPC
-      Properties:
-        CidrBlock: 10.0.0.0/16
-        EnableDnsSupport: true
-        EnableDnsHostnames: true
-    SubnetA:
-      DependsOn: VPC
-      Type: AWS::EC2::Subnet
-      Properties:
-        VpcId:
-          Ref: VPC
-        AvailabilityZone: ${self:custom.config.region}a
-        CidrBlock: 10.0.0.0/24
-    SubnetB:
-      DependsOn: VPC
-      Type: AWS::EC2::Subnet
-      Properties:
-        VpcId:
-          Ref: VPC
-        AvailabilityZone: ${self:custom.config.region}b
-        CidrBlock: 10.0.1.0/24
-    InternetGateway:
-      Type: AWS::EC2::InternetGateway
-    VPCGatewayAttachment:
-      Type: AWS::EC2::VPCGatewayAttachment
-      Properties:
-        VpcId:
-          Ref: VPC
-        InternetGatewayId:
-          Ref: InternetGateway
-    RouteTable:
-      Type: AWS::EC2::RouteTable
-      Properties:
-        VpcId:
-          Ref: VPC
-    Route:
-      Type: AWS::EC2::Route
-      Properties:
-        DestinationCidrBlock: 0.0.0.0/0
-        GatewayId:
-          Ref: InternetGateway
-        RouteTableId:
-          Ref: RouteTable
-    SubnetRouteTableAssociationA:
-      Type: AWS::EC2::SubnetRouteTableAssociation
-      Properties:
-        RouteTableId:
-          Ref: RouteTable
-        SubnetId:
-          Ref: SubnetA
-    SubnetRouteTableAssociationB:
-      Type: AWS::EC2::SubnetRouteTableAssociation
-      Properties:
-        RouteTableId:
-          Ref: RouteTable
-        SubnetId:
-          Ref: SubnetB
-    SecurityGroup:
-      DependsOn: VPC
-      Type: AWS::EC2::SecurityGroup
-      Properties:
-        GroupDescription: SecurityGroup
-        VpcId:
-          Ref: VPC
-        SecurityGroupIngress:
-        - IpProtocol: tcp
-          FromPort: 3306
-          ToPort: 3306
-          CidrIp: 0.0.0.0/0
-    RDSSubnetGroup:
-      Type: AWS::RDS::DBSubnetGroup
-      Properties:
-        DBSubnetGroupDescription: RDSSubnetGroup
-        SubnetIds:
-        - Ref: SubnetA
-        - Ref: SubnetB
-    DB:
-      DependsOn: SecurityGroup
-      Type: AWS::RDS::DBInstance
-      Properties:
-        Engine: mysql
-        EngineVersion: 5.6.40
-        DBInstanceClass: ${self:custom.config.rds.class}
-        StorageType: gp2
-        AllocatedStorage: 20
-        MultiAZ: false
-        PubliclyAccessible: true
-        BackupRetentionPeriod: 7
-        DBInstanceIdentifier: twitch-stitch-${self:custom.config.stage}
-        DBName: ${self:custom.config.rds.db}
-        MasterUsername: ${self:custom.config.rds.username}
-        MasterUserPassword: ${self:custom.config.rds.password}
-        VPCSecurityGroups:
-        - "Fn::GetAtt": SecurityGroup.GroupId
-        DBSubnetGroupName:
-          Ref: RDSSubnetGroup
+
+  DBSubnetGroup:
+    Type: AWS::RDS::DBSubnetGroup
+    Properties:
+      DBSubnetGroupDescription: DBSubnetGroup
+      SubnetIds:
+      - Ref: SubnetRDSA
+      - Ref: SubnetRDSB
+      - Ref: SubnetRDSC
+
+  DBClusterParameterGroup:
+    Type: AWS::RDS::DBClusterParameterGroup
+    Properties:
+      Description: DBClusterParameterGroup
+      Family: aurora5.6
+      Parameters:
+        character_set_client: utf8mb4
+        character_set_database: utf8mb4
+        character_set_results: utf8mb4
+        character_set_connection: utf8mb4
+        collation_connection: utf8mb4_unicode_ci
+        collation_server: utf8mb4_unicode_ci
+        character_set_server: utf8mb4
+
+  DBCluster:
+    # DependsOn: VPC
+    Type: AWS::RDS::DBCluster
+    Properties:
+      VpcSecurityGroupIds:
+        - "Fn::GetAtt": [VPC, DefaultSecurityGroup]
+      DBSubnetGroupName:
+        Ref: DBSubnetGroup
+      DBClusterParameterGroupName:
+        Ref: DBClusterParameterGroup
+      Engine: aurora
+      EngineMode: serverless
+      DBClusterIdentifier: twitch-stitch-${self:custom.config.stage}
+      DatabaseName: ${self:custom.config.rds.db}
+      MasterUsername: ${self:custom.config.rds.username}
+      MasterUserPassword: ${self:custom.config.rds.password}
+      ScalingConfiguration:
+        AutoPause: true
+        MaxCapacity: 64
+        MinCapacity: 2
+        SecondsUntilAutoPause: 300
+      BackupRetentionPeriod: 7
 
