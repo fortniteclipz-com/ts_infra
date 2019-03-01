@@ -32,6 +32,6 @@ Outputs:
 
   UserPool:
     Value:
-      Ref: UserPool
+      Ref: CognitoUserPoolUserPool
     Export:
       Name: UserPool
