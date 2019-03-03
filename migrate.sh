@@ -10,7 +10,7 @@ cd $migrations_dir
 if [ ! -d ./venv ]; then
     rm -rf ./venv
     rm -rf ./__pycache__
-    virtualenv ./venv -p /usr/local/bin/python3
+    /usr/local/Cellar/python/3.6.5_1/bin/python3 -m venv ./venv
     source venv/bin/activate
     pip3 install -r requirements.txt
     cd $twitch_stitch_root/ts_shared
