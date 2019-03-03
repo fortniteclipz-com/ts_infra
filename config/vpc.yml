@@ -16,7 +16,6 @@ Resources:
         Ref: VPC
       InternetGatewayId:
         Ref: InternetGateway
-
   RouteTable:
     Type: AWS::EC2::RouteTable
     Properties:
@@ -31,14 +30,39 @@ Resources:
       RouteTableId:
         Ref: RouteTable
 
-  DefaultSecurityGroupIngressAll:
+  SubnetRDSA:
     # DependsOn: VPC
-    Type: AWS::EC2::SecurityGroupIngress
+    Type: AWS::EC2::Subnet
     Properties:
-      GroupId:
-        "Fn::GetAtt": [VPC, DefaultSecurityGroup]
-      IpProtocol: -1
-      CidrIp: 0.0.0.0/0
+      VpcId:
+        Ref: VPC
+      AvailabilityZone: ${self:custom.config.region}a
+      CidrBlock: 10.0.0.0/22
+      MapPublicIpOnLaunch: true
+  SubnetRDSB:
+    # DependsOn: VPC
+    Type: AWS::EC2::Subnet
+    Properties:
+      VpcId:
+        Ref: VPC
+      AvailabilityZone: ${self:custom.config.region}b
+      CidrBlock: 10.0.4.0/22
+      MapPublicIpOnLaunch: true
+  SubnetRouteTableAssociationRDSA:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: RouteTable
+      SubnetId:
+        Ref: SubnetRDSA
+  SubnetRouteTableAssociationRDSB:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId:
+        Ref: RouteTable
+      SubnetId:
+        Ref: SubnetRDSB
+
   DefaultSecurityGroupIngress3306:
     # DependsOn: VPC
     Type: AWS::EC2::SecurityGroupIngress
@@ -49,14 +73,3 @@ Resources:
       FromPort: 3306
       ToPort: 3306
       CidrIp: 0.0.0.0/0
-  DefaultSecurityGroupIngress22:
-    # DependsOn: VPC
-    Type: AWS::EC2::SecurityGroupIngress
-    Properties:
-      GroupId:
-        "Fn::GetAtt": [VPC, DefaultSecurityGroup]
-      IpProtocol: tcp
-      FromPort: 22
-      ToPort: 22
-      CidrIp: 0.0.0.0/0
-

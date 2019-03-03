@@ -7,18 +7,10 @@ provider:
   runtime: python3.6
   stage: ${self:custom.config.stage}
   versionFunctions: false
-  environment:
-    TS_ENV: ${self:custom.config.stage}
-
-  vpc:
-    securityGroupIds:
-      - "Fn::GetAtt": [VPC, DefaultSecurityGroup]
-    subnetIds:
-      - Ref: SubnetLambdaA
-      - Ref: SubnetLambdaB
-      - Ref: SubnetLambdaC
   iamRoleStatements:
     ${self:custom.config.iam.role-statement}
+  environment:
+    TS_ENV: ${self:custom.config.stage}
 
   memorySize: 128
   timeout: 30
@@ -43,9 +35,7 @@ custom:
 
 resources:
   - ${file(./config/vpc.yml)}
-  - ${file(./config/subnet.yml)}
   - ${file(./config/rds.yml)}
-  - ${file(./config/ec2.yml)}
   - ${file(./config/queue.yml)}
   - ${file(./config/cognito.yml)}
   - ${file(./config/output.yml)}

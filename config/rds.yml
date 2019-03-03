@@ -1,5 +1,27 @@
 Resources:
 
+  DBInstance:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      VPCSecurityGroups:
+      - "Fn::GetAtt": [VPC, DefaultSecurityGroup]
+      DBSubnetGroupName:
+        Ref: DBSubnetGroup
+      DBParameterGroupName:
+        Ref: DBParameterGroup
+      DBInstanceIdentifier: twitch-stitch-${self:custom.config.stage}
+      DBName: ${self:custom.config.rds.db}
+      MasterUsername: ${self:custom.config.rds.username}
+      MasterUserPassword: ${self:custom.config.rds.password}
+      Engine: mysql
+      EngineVersion: 5.6.40
+      DBInstanceClass: db.t3.medium
+      StorageType: gp2
+      AllocatedStorage: 20
+      MultiAZ: false
+      PubliclyAccessible: true
+      BackupRetentionPeriod: 7
+
   DBSubnetGroup:
     Type: AWS::RDS::DBSubnetGroup
     Properties:
@@ -7,13 +29,12 @@ Resources:
       SubnetIds:
       - Ref: SubnetRDSA
       - Ref: SubnetRDSB
-      - Ref: SubnetRDSC
 
-  DBClusterParameterGroup:
-    Type: AWS::RDS::DBClusterParameterGroup
+  DBParameterGroup:
+    Type: AWS::RDS::DBParameterGroup
     Properties:
-      Description: DBClusterParameterGroup
-      Family: aurora5.6
+      Description: DBParameterGroup
+      Family: mysql5.6
       Parameters:
         character_set_client: utf8
         character_set_database: utf8
@@ -22,27 +43,4 @@ Resources:
         collation_connection: utf8_unicode_ci
         collation_server: utf8_unicode_ci
         character_set_server: utf8
-
-  DBCluster:
-    # DependsOn: VPC
-    Type: AWS::RDS::DBCluster
-    Properties:
-      VpcSecurityGroupIds:
-        - "Fn::GetAtt": [VPC, DefaultSecurityGroup]
-      DBSubnetGroupName:
-        Ref: DBSubnetGroup
-      DBClusterParameterGroupName:
-        Ref: DBClusterParameterGroup
-      Engine: aurora
-      EngineMode: serverless
-      DBClusterIdentifier: twitch-stitch-${self:custom.config.stage}
-      DatabaseName: ${self:custom.config.rds.db}
-      MasterUsername: ${self:custom.config.rds.username}
-      MasterUserPassword: ${self:custom.config.rds.password}
-      ScalingConfiguration:
-        AutoPause: true
-        MaxCapacity: 64
-        MinCapacity: 2
-        SecondsUntilAutoPause: 300
-      BackupRetentionPeriod: 7
-
+        max_connections: 2000

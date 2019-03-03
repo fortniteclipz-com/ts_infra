@@ -1,8 +1,4 @@
 Resources:
-  ClipDeadQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      QueueName: ${self:custom.config.sqs.queues.clip.name}-dead-${self:custom.config.stage}
 
   ClipQueue:
     Type: AWS::SQS::Queue
@@ -11,13 +7,13 @@ Resources:
       VisibilityTimeout: 30
       RedrivePolicy:
         deadLetterTargetArn:
-          "Fn::GetAtt": [ClipDeadQueue, Arn]
+          Ref: ClipDeadQueue
         maxReceiveCount: 1000
 
-  MontageDeadQueue:
+  ClipDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.montage.name}-dead-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.clip.name}-dead-${self:custom.config.stage}
 
   MontageQueue:
     Type: AWS::SQS::Queue
@@ -26,8 +22,13 @@ Resources:
       VisibilityTimeout: 30
       RedrivePolicy:
         deadLetterTargetArn:
-          "Fn::GetAtt": [MontageDeadQueue, Arn]
+          Ref: MontageDeadQueue
         maxReceiveCount: 1000
+
+  MontageDeadQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:custom.config.sqs.queues.montage.name}-dead-${self:custom.config.stage}
 
   StreamAnalyzeQueue:
     Type: AWS::SQS::Queue
@@ -36,18 +37,13 @@ Resources:
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
-          "Fn::GetAtt": [StreamAnalyzeDeadQueue, Arn]
+          Ref: StreamAnalyzeDeadQueue
         maxReceiveCount: 1000
 
   StreamAnalyzeDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
       QueueName: ${self:custom.config.sqs.queues.stream--analyze.name}-dead-${self:custom.config.stage}
-
-  StreamInitializeDeadQueue:
-    Type: AWS::SQS::Queue
-    Properties:
-      QueueName: ${self:custom.config.sqs.queues.stream--initialize.name}-dead-${self:custom.config.stage}
 
   StreamInitializeQueue:
     Type: AWS::SQS::Queue
@@ -56,8 +52,13 @@ Resources:
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
-          "Fn::GetAtt": [StreamInitializeDeadQueue, Arn]
+          Ref: StreamInitializeDeadQueue
         maxReceiveCount: 1000
+
+  StreamInitializeDeadQueue:
+    Type: AWS::SQS::Queue
+    Properties:
+      QueueName: ${self:custom.config.sqs.queues.stream--initialize.name}-dead-${self:custom.config.stage}
 
   StreamSegmentAnalyzeQueue:
     Type: AWS::SQS::Queue
@@ -66,7 +67,7 @@ Resources:
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
-          "Fn::GetAtt": [StreamSegmentAnalyzeDeadQueue, Arn]
+          Ref: StreamSegmentAnalyzeDeadQueue
         maxReceiveCount: 1000
 
   StreamSegmentAnalyzeDeadQueue:
@@ -81,7 +82,7 @@ Resources:
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
-          "Fn::GetAtt": [StreamSegmentDownloadDeadQueue, Arn]
+          Ref: StreamSegmentDownloadDeadQueue
         maxReceiveCount: 1000
 
   StreamSegmentDownloadDeadQueue:

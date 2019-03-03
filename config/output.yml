@@ -1,29 +1,5 @@
 Outputs:
 
-  DefaultSecurityGroup:
-    Value:
-      "Fn::GetAtt": [VPC, DefaultSecurityGroup]
-    Export:
-      Name: DefaultSecurityGroup
-
-  SubnetLambdaA:
-    Value:
-      Ref: SubnetLambdaA
-    Export:
-      Name: SubnetLambdaA
-
-  SubnetLambdaB:
-    Value:
-      Ref: SubnetLambdaB
-    Export:
-      Name: SubnetLambdaB
-
-  SubnetLambdaC:
-    Value:
-      Ref: SubnetLambdaC
-    Export:
-      Name: SubnetLambdaC
-
   UserPool:
     Value:
       Ref: CognitoUserPoolUserPool
