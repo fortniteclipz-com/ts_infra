@@ -7,7 +7,7 @@ Resources:
       VpcId:
         Ref: VPC
       AvailabilityZone: ${self:custom.config.region}a
-      CidrBlock: 10.0.0.0/24
+      CidrBlock: 10.0.0.0/22
       MapPublicIpOnLaunch: true
   SubnetRouteTableAssociationRDSA:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -24,7 +24,7 @@ Resources:
       VpcId:
         Ref: VPC
       AvailabilityZone: ${self:custom.config.region}b
-      CidrBlock: 10.0.1.0/24
+      CidrBlock: 10.0.4.0/22
       MapPublicIpOnLaunch: true
   SubnetRouteTableAssociationRDSB:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -41,7 +41,7 @@ Resources:
       VpcId:
         Ref: VPC
       AvailabilityZone: ${self:custom.config.region}c
-      CidrBlock: 10.0.2.0/24
+      CidrBlock: 10.0.8.0/22
       MapPublicIpOnLaunch: true
   SubnetRouteTableAssociationRDSC:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -58,7 +58,7 @@ Resources:
       VpcId:
         Ref: VPC
       AvailabilityZone: ${self:custom.config.region}a
-      CidrBlock: 10.0.3.0/24
+      CidrBlock: 10.0.12.0/22
       MapPublicIpOnLaunch: true
   SubnetRouteTableAssociationLambdaA:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -75,7 +75,7 @@ Resources:
       VpcId:
         Ref: VPC
       AvailabilityZone: ${self:custom.config.region}b
-      CidrBlock: 10.0.4.0/24
+      CidrBlock: 10.0.16.0/22
       MapPublicIpOnLaunch: true
   SubnetRouteTableAssociationLambdaB:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -92,7 +92,7 @@ Resources:
       VpcId:
         Ref: VPC
       AvailabilityZone: ${self:custom.config.region}c
-      CidrBlock: 10.0.5.0/24
+      CidrBlock: 10.0.20.0/22
       MapPublicIpOnLaunch: true
   SubnetRouteTableAssociationLambdaC:
     Type: AWS::EC2::SubnetRouteTableAssociation
@@ -109,7 +109,7 @@ Resources:
       VpcId:
         Ref: VPC
       AvailabilityZone: ${self:custom.config.region}a
-      CidrBlock: 10.0.6.0/24
+      CidrBlock: 10.0.24.0/22
       MapPublicIpOnLaunch: true
   SubnetRouteTableAssociationEC2A:
     Type: AWS::EC2::SubnetRouteTableAssociation

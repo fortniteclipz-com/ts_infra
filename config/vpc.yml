@@ -31,6 +31,14 @@ Resources:
       RouteTableId:
         Ref: RouteTable
 
+  DefaultSecurityGroupIngressAll:
+    # DependsOn: VPC
+    Type: AWS::EC2::SecurityGroupIngress
+    Properties:
+      GroupId:
+        "Fn::GetAtt": [VPC, DefaultSecurityGroup]
+      IpProtocol: -1
+      CidrIp: 0.0.0.0/0
   DefaultSecurityGroupIngress3306:
     # DependsOn: VPC
     Type: AWS::EC2::SecurityGroupIngress
