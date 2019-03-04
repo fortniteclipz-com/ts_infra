@@ -15,7 +15,7 @@ Resources:
       MasterUserPassword: ${self:custom.config.rds.password}
       Engine: mysql
       EngineVersion: 5.6.40
-      DBInstanceClass: db.t3.medium
+      DBInstanceClass: db.t3.small
       StorageType: gp2
       AllocatedStorage: 20
       MultiAZ: false
