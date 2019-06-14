@@ -9,13 +9,13 @@ Resources:
         Ref: DBSubnetGroup
       DBParameterGroupName:
         Ref: DBParameterGroup
-      DBInstanceIdentifier: twitch-stitch-${self:custom.config.stage}
+      DBInstanceIdentifier: ts-${self:custom.config.stage}
       DBName: ${self:custom.config.rds.db}
       MasterUsername: ${self:custom.config.rds.username}
       MasterUserPassword: ${self:custom.config.rds.password}
       Engine: mysql
       EngineVersion: 5.6.40
-      DBInstanceClass: db.t3.small
+      DBInstanceClass: db.t3.micro
       StorageType: gp2
       AllocatedStorage: 20
       MultiAZ: false

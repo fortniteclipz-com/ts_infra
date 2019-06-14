@@ -13,7 +13,7 @@ password = ts_config.get('rds.password')
 stage = ts_config.get('stage')
 host = ts_config.get('rds.host')
 db = ts_config.get('rds.db')
-connection_url = f"mysql+pymysql://{username}:{password}@twitch-stitch-{stage}.{host}/{db}"
+connection_url = f"mysql+pymysql://{username}:{password}@ts-{stage}.{host}/{db}"
 print("--- connection_url", connection_url)
 config.set_main_option('sqlalchemy.url', connection_url)
 
