@@ -14,7 +14,7 @@ stage = ts_config.get('stage')
 host = ts_config.get('rds.host')
 db = ts_config.get('rds.db')
 connection_url = f"mysql+pymysql://{username}:{password}@{host}/{db}"
-print("--- connection_url", connection_url)
+print("alembic | connection_url |", connection_url)
 config.set_main_option('sqlalchemy.url', connection_url)
 
 # Interpret the config file for Python logging.
