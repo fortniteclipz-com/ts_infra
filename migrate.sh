@@ -1,7 +1,7 @@
 ts_env=${1:-'dev'}
 echo "migrate | start | ts_env=$ts_env"
 
-twitch_stitch_root="${PWD%/*}"
+twitch_stitch_root=${PWD%/*}
 cd $twitch_stitch_root/ts_infra/migrations
 if [ ! -d ./venv ]; then
     echo "migrate | bootstrapping | ts_env=$ts_env"
@@ -18,4 +18,5 @@ echo "migrate | migrating | ts_env=$ts_env"
 source venv/bin/activate
 export TS_ENV=$ts_env
 alembic upgrade head
+
 echo "migrate | done | ts_env=$ts_env"
