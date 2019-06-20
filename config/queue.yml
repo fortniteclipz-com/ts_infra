@@ -3,7 +3,7 @@ Resources:
   ClipQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.clip.name}-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.clip.name}
       VisibilityTimeout: 30
       RedrivePolicy:
         deadLetterTargetArn:
@@ -13,12 +13,12 @@ Resources:
   ClipDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.clip.name}-dead-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.clip.name}---dead
 
   MontageQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.montage.name}-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.montage.name}
       VisibilityTimeout: 30
       RedrivePolicy:
         deadLetterTargetArn:
@@ -28,12 +28,12 @@ Resources:
   MontageDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.montage.name}-dead-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.montage.name}---dead
 
   StreamAnalyzeQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.stream--analyze.name}-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.stream--analyze.name}
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
@@ -43,12 +43,12 @@ Resources:
   StreamAnalyzeDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.stream--analyze.name}-dead-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.stream--analyze.name}---dead
 
   StreamInitializeQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.stream--initialize.name}-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.stream--initialize.name}
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
@@ -58,12 +58,12 @@ Resources:
   StreamInitializeDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.stream--initialize.name}-dead-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.stream--initialize.name}---dead
 
   StreamSegmentAnalyzeQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.stream-segment--analyze.name}-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.stream-segment--analyze.name}
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
@@ -73,12 +73,12 @@ Resources:
   StreamSegmentAnalyzeDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.stream-segment--analyze.name}-dead-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.stream-segment--analyze.name}---dead
 
   StreamSegmentDownloadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.stream-segment--download.name}-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.stream-segment--download.name}
       VisibilityTimeout: 300
       RedrivePolicy:
         deadLetterTargetArn:
@@ -88,4 +88,4 @@ Resources:
   StreamSegmentDownloadDeadQueue:
     Type: AWS::SQS::Queue
     Properties:
-      QueueName: ${self:custom.config.sqs.queues.stream-segment--download.name}-dead-${self:custom.config.stage}
+      QueueName: ${self:custom.config.sqs.queues.stream-segment--download.name}---dead
